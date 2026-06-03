@@ -33,7 +33,7 @@ export function CartPaymentButton({
   // Check if Paystack is loaded
   useEffect(() => {
     const checkPaystack = () => {
-      if (typeof window !== 'undefined' && window.PaystackPop) {
+      if (typeof window !== 'undefined' && (window as any).PaystackPop) {
         console.log('✅ Paystack is ready');
         setIsPaystackReady(true);
       } else {
@@ -90,7 +90,7 @@ export function CartPaymentButton({
       });
 
       // Open Paystack popup
-      const handler = window.PaystackPop.setup({
+      const handler = (window as any).PaystackPop.setup({
         key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
         email: data.userEmail,
         amount: amountInKobo,
